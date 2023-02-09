@@ -22,7 +22,7 @@ namespace UserInformation.Controllers
 
 		public ActionResult Index()
 		{
-			string dateTime = DateTime.Now.ToString();
+			DateTime dateTime = DateTime.Now;
 			string ipAddress = Response.HttpContext.Connection.RemoteIpAddress.ToString();
 			var userInfo = new BsonDocument { { "dateTime", dateTime }, { "ipAddress", ipAddress } };
 			_userService.InsertOne(userInfo);            
@@ -31,7 +31,7 @@ namespace UserInformation.Controllers
 
 		public ActionResult Privacy()
 		{
-            var userInfo = _users.Find(user => true).ToList();
+			var userInfo = _users.Find(user => true).SortByDescending(user => user.DateAndTime).FirstOrDefault();
             //var userInfo = _users.Find(user => user.DateAndTime).ToList();
             return View(userInfo);
 		}

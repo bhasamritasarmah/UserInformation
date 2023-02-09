@@ -10,7 +10,7 @@ namespace UserInformation.Models
 		public string Id { get; set; }
 
 		[BsonElement("dateTime")]
-		public string DateAndTime { get; set; }
+		public DateTime DateAndTime { get; set; }
 
 		[BsonElement("ipAddress")]
 		public string IpAddress { get; set; }
